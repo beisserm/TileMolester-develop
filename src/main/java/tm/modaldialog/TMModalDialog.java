@@ -26,14 +26,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
-*
-* A class providing a general framework for modal dialogs.
-* It has an OK and Cancel button. Must be subclassed to
-* provide the getDialogPane() method, which creates and
-* returns a panel with the actual dialog components where
-* input can be given by the user.
-*
-**/
+ *
+ * A class providing a general framework for modal dialogs.
+ * It has an OK and Cancel button. Must be subclassed to
+ * provide the getDialogPane() method, which creates and
+ * returns a panel with the actual dialog components where
+ * input can be given by the user.
+ *
+ **/
 
 public abstract class TMModalDialog extends JDialog {
 
@@ -43,11 +43,11 @@ public abstract class TMModalDialog extends JDialog {
     private Xlator xl;
     private JPanel dialogPane;
 
-/**
-*
-*
-*
-**/
+    /**
+    *
+    *
+    *
+    **/
 
     public TMModalDialog(Frame owner, String title, Xlator xl) {
         super(owner, xl != null ? xl.xlate(title) : title, true);
@@ -56,17 +56,17 @@ public abstract class TMModalDialog extends JDialog {
         okButton = new JButton(xlate("OK"));
         cancelButton = new JButton(xlate("Cancel"));
         okButton.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    approveInput();
-                }
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        approveInput();
+                    }
             }
         );
         cancelButton.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    cancelInput();
-                }
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        cancelInput();
+                    }
             }
         );
         JPanel buttonPane = new JPanel();
@@ -92,7 +92,7 @@ public abstract class TMModalDialog extends JDialog {
                 return new Insets(10,10,10,10);
             }
         };
-		buttonPane.setBorder(new EmptyBorder(10, 0, 0, 0));
+        buttonPane.setBorder(new EmptyBorder(10, 0, 0, 0));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
         contentPane.add(buttonPane, BorderLayout.SOUTH);
@@ -102,11 +102,11 @@ public abstract class TMModalDialog extends JDialog {
 
     }
 
-/**
-*
-* Shows the dialog.
-*
-**/
+    /**
+     *
+     * Shows the dialog.
+     *
+     **/
 
     public int showDialog() {
         // center the dialog
@@ -114,48 +114,48 @@ public abstract class TMModalDialog extends JDialog {
         int insetx = (screenSize.width - getWidth()) / 2;
         int insety = (screenSize.height - getHeight()) / 2;
         setBounds(insetx, insety,
-                  getWidth(), getHeight());
+                getWidth(), getHeight());
 
         result = JOptionPane.CANCEL_OPTION;
         setVisible(true);
         return result;
     }
 
-/**
-*
-*
-*
-**/
+    /**
+    *
+    *
+    *
+    **/
 
     protected void approveInput() {
         result = JOptionPane.OK_OPTION;
         setVisible(false);
     }
 
-/**
-*
-*
-*
-**/
+    /**
+    *
+    *
+    *
+    **/
 
     protected void cancelInput() {
         result = JOptionPane.CANCEL_OPTION;
         setVisible(false);
     }
 
-/**
-*
-* Method that provides the real content pane of the dialog.
-*
-**/
+    /**
+     *
+     * Method that provides the real content pane of the dialog.
+     *
+     **/
 
     protected abstract JPanel getDialogPane();
 
-/**
-*
-*
-*
-**/
+    /**
+    *
+    *
+    *
+    **/
 
     protected static void buildConstraints(GridBagConstraints gbc, int gx, int gy, int gw, int gh, int wx, int wy) {
         gbc.gridx = gx;
@@ -166,13 +166,13 @@ public abstract class TMModalDialog extends JDialog {
         gbc.weighty = wy;
     }
 
-/**
-*
-* Sets enabled state of OK button.
-* Subclasses can use this to keep the user from OK'ing the input when it
-* isn't valid/completed.
-*
-**/
+    /**
+     *
+     * Sets enabled state of OK button.
+     * Subclasses can use this to keep the user from OK'ing the input when it
+     * isn't valid/completed.
+     *
+     **/
 
     public void maybeEnableOKButton() {
         okButton.setEnabled(inputOK());
@@ -192,14 +192,8 @@ public abstract class TMModalDialog extends JDialog {
         }
     }
 
-    public String xlate(String key) {
-        try {
-            String value = xl.xlate(key);
-            return value;
-        }
-        catch (Exception e) {
-            return key;
-        }
+    protected String xlate(String key) {
+        return xl.xlate(key);
     }
 
 }

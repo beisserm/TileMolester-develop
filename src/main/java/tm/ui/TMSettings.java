@@ -258,15 +258,9 @@ public class TMSettings extends JFrame {
 	 * If no corresponding value is found, the key itself is returned.
 	 *
 	 **/
-
-	 public String xlate(String key) {
-		try {
-			String value = xl.xlate(key);
-			return value;
-		} catch (Exception e) {
-			return key;
-		}
-	}
+	 private String xlate(String key) {
+        return xl.xlate(key);
+    }
 
 
 	/**

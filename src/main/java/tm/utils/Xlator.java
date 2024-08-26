@@ -21,49 +21,35 @@ package tm.utils;
 import java.util.ResourceBundle;
 import java.util.Locale;
 
-/**
-*
-*
-*
-**/
-
+/*
+ * This class provides a simple way to translate strings in the application.
+ */
 public class Xlator {
 
     private ResourceBundle rb;
-
-/**
-*
-*
-*
-**/
 
     public Xlator(String baseName, Locale locale) throws Exception {
         rb = null;
         try {
             rb = ResourceBundle.getBundle(baseName, locale);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
     }
 
-/**
-*
-*
-*
-**/
-
+    /**
+     * Translate a string to a different language. If the input key is not found the
+     * lookup key is returned.
+     * 
+     * @param key input key
+     * @return translated string
+     */
     public String xlate(String key) {
         try {
             String value = rb.getString(key);
             return value;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return key;
         }
-    }
-
-    public String trans(String key) {
-        return xlate(key);
     }
 }

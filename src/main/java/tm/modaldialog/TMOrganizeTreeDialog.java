@@ -285,20 +285,8 @@ public class TMOrganizeTreeDialog extends JDialog implements TreeModelListener {
     public void treeStructureChanged(TreeModelEvent e) {
     }
 
-/**
-*
-*
-*
-**/
-
-    public String xlate(String key) {
-        try {
-            String value = xl.xlate(key);
-            return value;
-        }
-        catch (Exception e) {
-            return key;
-        }
+    private String xlate(String key) {
+        return xl.xlate(key);
     }
 
 /**
